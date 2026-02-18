@@ -88,11 +88,13 @@ class ExperimentLogger(TaskExtension):
             self,
             experiment_options: ExperimentOptions,
             log_path: str,
+            log_name: str,
             skip: int,
     ):
         super().__init__()
         self.experiment_options = experiment_options
         self.log_path = log_path
+        self.log_name = log_name
         self.skip = skip
         self.data: ExperimentData | None = None
 
@@ -107,6 +109,7 @@ class ExperimentLogger(TaskExtension):
         return cls(
             experiment_options=experiment_options,
             log_path=config.log_path,
+            log_name=config.log_name,
             skip=config.skip,
         )
 
@@ -123,7 +126,7 @@ class ExperimentLogger(TaskExtension):
         pylog.info('Saving data to %s', self.log_path)
         os.makedirs(self.log_path, exist_ok=True)
         self.data.to_file(
-            os.path.join(self.log_path, 'simulation.hdf5'),
+            os.path.join(self.log_path, self.log_name),
             task.iteration,
         )
 
