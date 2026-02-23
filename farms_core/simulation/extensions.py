@@ -75,9 +75,10 @@ class ExperimentLoggerOptions(Options):
             extensions=[ExperimentLogger],
         )
 
-    def __init__(self, log_path, skip):
+    def __init__(self, log_path, log_name, skip):
         super().__init__()
         self.log_path = log_path
+        self.log_name = log_name
         self.skip = skip
 
 
