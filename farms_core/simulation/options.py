@@ -424,6 +424,11 @@ class MuJoCoSimulationOptions(Options):
                     description="No slip tolerance.",
                 ),
                 ChildDoc(
+                    name="tolerance",
+                    class_type=float,
+                    description="Constraint solver tolerance (MuJoCo option.tolerance).",
+                ),
+                ChildDoc(
                     name="viewer",
                     class_type=str,
                     description="MuJoCo or dm_control viewer",
@@ -461,6 +466,7 @@ class MuJoCoSimulationOptions(Options):
         self.ccd_tolerance: float = kwargs.pop('ccd_tolerance', 1e-6)
         self.noslip_iterations: int = kwargs.pop('noslip_iterations', 0)
         self.noslip_tolerance: float = kwargs.pop('noslip_tolerance', 1e-6)
+        self.tolerance: float = kwargs.pop('tolerance', 1e-8)
         self.viewer: int = kwargs.pop('viewer', 'MuJoCo')
         self.texture_repeat: int = kwargs.pop('texture_repeat', 1)
         self.shadow_size: int = kwargs.pop('shadow_size', 1024)
@@ -484,6 +490,7 @@ class MuJoCoSimulationOptions(Options):
             ccd_tolerance=kwargs.pop('ccd_tolerance', clargs.ccd_tolerance),
             noslip_iterations=kwargs.pop('noslip_iterations', clargs.noslip_iterations),
             noslip_tolerance=kwargs.pop('noslip_tolerance', clargs.noslip_tolerance),
+            tolerance=kwargs.pop('tolerance', 1e-8),
             extent=kwargs.pop('extent', clargs.mujoco_extent),
             **kwargs,
         )
